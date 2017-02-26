@@ -2,49 +2,51 @@ import java.util.Scanner;
   
 public class Recursive
 {
-  static int count = 0;
+
   public static void main(String []args)
   {
     Scanner keyboard = new Scanner(System.in);
     
     double x;
-   
-    double error;
-    
+    double err;
     
     System.out.println("Enter a number you want the square root of");
     x = keyboard.nextDouble();
-    double initialGuess = x / 2;
+    double guess = x / 2;
     
     System.out.println("Enter an acceptable error");
-    error = keyboard.nextDouble();
+    err = keyboard.nextDouble();
     
-    
-    System.out.println(squareRoot(x, initialGuess, error));
+    System.out.println("The square root of " + x + " is " + squareRoot(x , guess, err));
     
   }
   
-  public static double squareRoot(double x, double initialGuess, double error)
+  public static double squareRoot(double x, double guess, double err)
   {
-    count++;
+    double error;
+    error = Math.abs(x - guess * guess);
+    System.out.println(error + ": error");
     
-   
-    if(Math.abs(initialGuess * initialGuess - x) <= error)
+    if(x <= 0)
     {
-      return initialGuess;
+      return 1;
     }
-    else 
+    
+    if(error <= err)
     {
-      initialGuess = 0.5 * (initialGuess + (x / initialGuess));
-      return initialGuess;
+      return guess;
     }
-   
-   }
     
-    
-  
-  
- 
+    else
+    {
+      double newGuess = 0.5 * (guess + x / guess);
+      System.out.println(newGuess + ": newGuess");
+      return squareRoot(x, newGuess, err);
+    }
+  }
+        
 }
+ 
+                
   
 
